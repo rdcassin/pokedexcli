@@ -14,10 +14,13 @@ func repl() {
 		scanner.Scan()
 		input := scanner.Text()
 		text := cleanInput(input)
-		if len(text) > 0 {
-		fmt.Printf("Your command was: %s\n", text[0])
+		command := text[0]
+
+		cmd, exists := getCommands()[command]
+		if !exists {
+			fmt.Print("Unknown command\n")
 		} else {
-			fmt.Println("No command entered.")
+			cmd.callback()
 		}
 	}
 }
