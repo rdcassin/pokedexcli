@@ -5,9 +5,16 @@ import (
 	"strings"
 	"fmt"
 	"os"
+	"github.com/rdcassin/pokedexcli/internal/pokeapi"
 )
 
-func repl() {
+type config struct {
+	pokeapiClient   pokeapi.Client
+	Next 			*string
+	Previous 		*string
+}
+
+func repl(c *config) {
 	scanner := bufio.NewScanner(os.Stdin)
 	for {
 		fmt.Print("Pokedex > ")
@@ -19,8 +26,11 @@ func repl() {
 		cmd, exists := getCommands()[command]
 		if !exists {
 			fmt.Print("Unknown command\n")
-		} else {
-			cmd.callback()
+		} else{
+			err := cmd.callback(c)
+			if err != nil {
+				fmt.Println(err)				
+			}
 		}
 	}
 }
