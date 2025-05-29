@@ -26,7 +26,7 @@ func repl(c *config) {
 		cmd, exists := getCommands()[command]
 		if !exists {
 			fmt.Print("Unknown command\n")
-		} else{
+		} else {
 			err := cmd.callback(c)
 			if err != nil {
 				fmt.Println(err)				
