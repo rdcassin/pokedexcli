@@ -5,7 +5,7 @@ import (
 	"errors"
 )
 
-func commandMapb(c *config) error {
+func commandMapb(c *config, unusedArgument string) error {
 	if c.Previous == nil {
 		return errors.New("no previous map available")
 	}
@@ -19,7 +19,12 @@ func commandMapb(c *config) error {
 	c.Previous = locations.Previous
 	
 	for _, location := range locations.Results {
-		fmt.Println(location.Name)
+		id, err := getLocationAreaID(location.URL)
+		if err != nil {
+			return err
+		} else {
+			fmt.Printf("%v. %v\n", id, location.Name)
+		}
 	}
 	return nil
 }

@@ -4,7 +4,7 @@ import (
 	"fmt"
 )
 
-func commandMap(c *config) error {
+func commandMap(c *config, unusedArgument string) error {
 	locations, err := c.pokeapiClient.GetMap(c.Next)
 	if err != nil {
 		return err
@@ -14,9 +14,12 @@ func commandMap(c *config) error {
 	c.Previous = locations.Previous
 
 	for _, location := range locations.Results {
-		fmt.Println(location.Name)
+		id, err := getLocationAreaID(location.URL)
+		if err != nil {
+			return err
+		} else {
+			fmt.Printf("%v. %v\n", id, location.Name)
+		}
 	}
-
 	return nil
 }
-
