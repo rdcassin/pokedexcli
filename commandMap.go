@@ -18,8 +18,9 @@ func commandMap(c *config, unusedArgument string) error {
 		if err != nil {
 			return err
 		} else {
-			fmt.Printf("%v. %v\n", id, location.Name)
+			fmt.Printf("%s. %s\n", id, location.Name)
 		}
 	}
+
 	return nil
 }

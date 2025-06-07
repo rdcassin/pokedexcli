@@ -32,7 +32,7 @@ func repl(c *config) {
 		if !exists {
 			fmt.Print("Unknown command\n")
 		} else {
-			err := cmd.callback(c(commandParameter))
+			err := cmd.callback(c, commandParameter)
 			if err != nil {
 				fmt.Println(err)				
 			}

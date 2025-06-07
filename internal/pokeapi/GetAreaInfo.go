@@ -7,46 +7,46 @@ import (
 	"errors"
 )
 
-func (c *Client) GetMap(pageURL *string) (LocationAreaAPIResults, error) {
-	url := baseURL + "location-area/"
+func (c *Client) GetAreaInfo(areaIDOrName string) (AreaInfoAPIResults, error) {
 
-	if pageURL != nil {
-		url = *pageURL
+	if areaIDOrName == "" {
+		return AreaInfoAPIResults{}, errors.New("no area ID or name provided")
 	}
 
+	url := baseURL + "location-area/" + areaIDOrName + "/"
+
 	if cachedData, exists := c.cache.Get(url); exists {
-		results := LocationAreaAPIResults{}
+		results := AreaInfoAPIResults{}
 		err := json.Unmarshal(cachedData, &results)
 		if err != nil {
-			return LocationAreaAPIResults{}, err
+			return AreaInfoAPIResults{}, err
 		}
-		
 		return results, nil
 	}
 
 	req, err := http.NewRequest("GET", url, nil)
 	if err != nil {
-		return LocationAreaAPIResults{}, err
+		return AreaInfoAPIResults{}, err
 	}
-	req.Header.Set("Content-Type", "application/json")
+	req.Header.Set("Content-type", "application/json")
 
 	resp, err := c.httpClient.Do(req)
 	if err != nil {
-		return LocationAreaAPIResults{}, errors.New("this area does not exist or is not available at this time")
+		return AreaInfoAPIResults{}, err
 	}
 	defer resp.Body.Close()
 
 	bodyBytes, err := io.ReadAll(resp.Body)
 	if err != nil {
-		return LocationAreaAPIResults{}, err
+		return AreaInfoAPIResults{}, err
 	}
 
 	c.cache.Add(url, bodyBytes)
 
-	results := LocationAreaAPIResults{}
+	results := AreaInfoAPIResults{}
 	err = json.Unmarshal(bodyBytes, &results)
 	if err != nil {
-		return LocationAreaAPIResults{}, err
+		return AreaInfoAPIResults{}, err
 	}
 
 	return results, nil
