@@ -7,58 +7,58 @@ type AreaInfoAPIResults struct {
 	Location             	 Location                 `json:"location"`
 	AreaName             	 string                   `json:"name"`
 	AreaNameVariations   	 []AreaNameVariation      `json:"names"`
-	PokemonEncounters    	 []PokemonEncounter      `json:"pokemon_encounters"`
+	PokemonEncounters    	 []PokemonEncounter       `json:"pokemon_encounters"`
 }
 
 type EncounterMethodAndRate struct {
-	EncounterMethod 					EncounterMethod  `json:"encounter_method"`
-	EncounterMethodsVersionsAndRates  	[]EncounterMethodsVersionAndRate `json:"version_details"`
+	Method			 EncounterMethod  				 `json:"encounter_method"`
+	VersionsAndRates []EncounterMethodVersionAndRate `json:"version_details"`
 }
 
 type EncounterMethod struct {
-	MethodName string `json:"name"`
-	MethodURL  string `json:"url"`
+	Name string `json:"name"`
+	URL  string `json:"url"`
 }
 
-type EncounterMethodsVersionAndRate struct {
-	EncounterMethodRate    int     	   	  `json:"rate"`
-	EncounterMethodVersion VersionDetails `json:"version"`
+type EncounterMethodVersionAndRate struct {
+	Rate    int     	   `json:"rate"`
+	Version VersionDetails `json:"version"`
 }
 
 type VersionDetails struct {
-	EncounterMethodVersionName string `json:"name"`
-	EncounterMethodVersionURL  string `json:"url"`
+	Name string `json:"name"`
+	URL  string `json:"url"`
 }
 
 type Location struct {
-	LocationName string `json:"name"`
-	LocationURL  string `json:"url"`
+	Name string `json:"name"`
+	URL  string `json:"url"`
 }
 
 type AreaNameVariation struct {
-	Language LanguageDetails `json:"language"`
-	AreaName     string   `json:"name"`
+	Language Language `json:"language"`
+	AreaName string   `json:"name"`
 }
 
-type LanguageDetails struct {
-	LanguageName string `json:"name"`
-	LanguageURL  string `json:"url"`
+type Language struct {
+	Name string `json:"name"`
+	URL  string `json:"url"`
 }
 
 type PokemonEncounter struct {
-	Pokemon        				   	  PokemonDetails   					  `json:"pokemon"`
-	PokemonEncounterAndVersionDetails []PokemonEncounterAndVersionDetail  `json:"version_details"`
+	Pokemon Pokemon   				  		   `json:"pokemon"`
+	Details []PokemonEncounterAndVersionDetail `json:"version_details"`
 }
 
-type PokemonDetails struct {
-	PokemonName string `json:"name"`
-	PokemonURL  string `json:"url"`
+type Pokemon struct {
+	Name string `json:"name"`
+	URL  string `json:"url"`
 }
 
 type PokemonEncounterAndVersionDetail struct {
-	PokemonEncounterDetails 			[]PokemonEncounterDetail 		`json:"encounter_details"`
-	MaxChance		  					int                             `json:"max_chance"`
-	PokemoneEncounterVersionDetails     VersionDetails  				`json:"version"`
+	EncounterDetails []PokemonEncounterDetail `json:"encounter_details"`
+	MaxChance		 int                      `json:"max_chance"`
+	VersionDetails   VersionDetails  		  `json:"version"`
 }
 
 type PokemonEncounterDetail struct {
@@ -70,6 +70,6 @@ type PokemonEncounterDetail struct {
 }
 
 type EncounterMethodDetails struct {
-	EncounterMethodName string `json:"name"`
-	EncounterMethodURL  string `json:"url"`
+	Name string `json:"name"`
+	URL  string `json:"url"`
 }

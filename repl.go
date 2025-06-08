@@ -21,18 +21,18 @@ func repl(c *config) {
 		scanner.Scan()
 		input := scanner.Text()
 		text := cleanInput(input)
-		command := text[0]
-		commandParameter := ""
 
+		command := text[0]
+		commandParameter := []string{}
 		if len(text) > 1 {
-			commandParameter = text[1]
+			commandParameter = text[1:]
 		}
 
 		cmd, exists := getCommands()[command]
 		if !exists {
 			fmt.Print("Unknown command\n")
 		} else {
-			err := cmd.callback(c, commandParameter)
+			err := cmd.callback(c, commandParameter...)
 			if err != nil {
 				fmt.Println(err)				
 			}

@@ -5,7 +5,7 @@ import (
 	"errors"
 )
 
-func commandMapb(c *config, unusedArgument string) error {
+func commandMapb(c *config, unusedArgument ...string) error {
 	if c.Previous == nil {
 		return errors.New("no previous map available")
 	}

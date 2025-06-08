@@ -3,11 +3,16 @@ package main
 type cliCommand struct {
 	name 	  		string
 	description 	string
-	callback 		func(*config, string) error
+	callback 		func(*config, ...string) error
 }
 
 func getCommands() map[string]cliCommand {
 	return map[string]cliCommand{
+		"catch": {
+			name:        "catch",
+			description: "Catch a Pokemon by ID or name",
+			callback:    commandCatch,
+		},
 		"exit": {
 			name:        "exit",
 			description: "Exit the Pokedex",

@@ -4,15 +4,9 @@ import (
 	"encoding/json"
 	"io"
 	"net/http"
-	"errors"
 )
 
 func (c *Client) GetAreaInfo(areaIDOrName string) (AreaInfoAPIResults, error) {
-
-	if areaIDOrName == "" {
-		return AreaInfoAPIResults{}, errors.New("no area ID or name provided")
-	}
-
 	url := baseURL + "location-area/" + areaIDOrName + "/"
 
 	if cachedData, exists := c.cache.Get(url); exists {

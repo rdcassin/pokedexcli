@@ -4,7 +4,7 @@ import (
 	"fmt"
 )
 
-func commandMap(c *config, unusedArgument string) error {
+func commandMap(c *config, unusedArgument ...string) error {
 	locations, err := c.pokeapiClient.GetMap(c.Next)
 	if err != nil {
 		return err
