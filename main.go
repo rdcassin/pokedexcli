@@ -11,6 +11,7 @@ func main() {
 		pokeapiClient: pokeClient,
 		Next: 	   nil,
 		Previous: nil,
+		caughtPokemon: map[string]pokeapi.Pokemon{},
 	}
 	repl(c)
 }

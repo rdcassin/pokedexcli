@@ -4,6 +4,7 @@ import (
 	"errors"
 	"strings"
 	"math/rand"
+	"github.com/rdcassin/pokedexcli/internal/pokeapi"
 	"time"
 	"fmt"
 )
@@ -33,6 +34,17 @@ func commandCatch(c *config, pokemonIDOrName ...string) error {
 	
 	catchCheck := float64(1 - (baseExperience / (baseExperience + roll)))
 	caught := catchCheck > catchThreshold
+
+	if caught {
+		newPokemon := pokeapi.Pokemon {
+			Name: pokemon.Name,
+			Height: pokemon.Height,
+			Weight: pokemon.Weight,
+			Stats: pokemon.Stats,
+			Types: pokemon.Types,
+		}
+		c.caughtPokemon[pokemon.Name] = newPokemon
+	}
 
 	//Setup of the output of the Catching Mechanic
 	target := pokemon.Name

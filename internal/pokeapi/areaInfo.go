@@ -1,6 +1,6 @@
 package pokeapi
 
-type AreaInfoAPIResults struct {
+type AreaInfo struct {
 	EncounterMethodsAndRates []EncounterMethodAndRate `json:"encounter_method_rates"`
 	GameIndex            	 int                      `json:"game_index"`
 	ID                   	 int                      `json:"id"`
@@ -46,11 +46,11 @@ type Language struct {
 }
 
 type PokemonEncounter struct {
-	Pokemon Pokemon   				  		   `json:"pokemon"`
+	Pokemon LocationPokemon   				   `json:"pokemon"`
 	Details []PokemonEncounterAndVersionDetail `json:"version_details"`
 }
 
-type Pokemon struct {
+type LocationPokemon struct {
 	Name string `json:"name"`
 	URL  string `json:"url"`
 }
